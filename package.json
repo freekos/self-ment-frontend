@@ -26,6 +26,8 @@
 		]
 	},
 	"dependencies": {
+		"antd": "^5.4.0",
+		"classnames": "^2.3.2",
 		"compose-function": "^3.0.3",
 		"effector": "^22.8.0",
 		"effector-factorio": "^1.1.0",
