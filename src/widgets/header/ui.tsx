@@ -6,6 +6,8 @@ import { NavLink } from 'react-router-dom'
 
 import { routes } from '~src/pages/routes'
 
+import { ShowOnly, SignOutButton } from '~src/entities/session'
+
 import { Logo } from '~src/shared/assets'
 import { envVars } from '~src/shared/config'
 
@@ -16,16 +18,14 @@ interface NavItem {
 	path: string
 }
 
+// TODO: Don't import routes here
+
 const HEADER_STICKY = 100
 const NAVS: Array<NavItem> = [
 	{
 		title: 'Главная',
 		path: routes.home(),
 	},
-	// {
-	// 	title: 'Коллекция',
-	// 	path: routes.(),
-	// },
 ]
 
 export function Header() {
@@ -40,15 +40,33 @@ export function Header() {
 				</NavLink>
 			</div>
 			<div className={styles.header_navs}>
-				{NAVS.map((navItem, index) => (
-					<NavLink key={index} to={navItem.path}>
-						<Button type='link'>{navItem.title}</Button>
-					</NavLink>
-				))}
+				<ShowOnly showRole='user'>
+					{NAVS.map((navItem, index) => (
+						<NavLink key={index} to={navItem.path}>
+							<Button size='large' type='link'>
+								{navItem.title}
+							</Button>
+						</NavLink>
+					))}
+				</ShowOnly>
 			</div>
+
 			<div className={cn(styles.header_right)}>
-				<Button type='link'>Войти</Button>
-				<Button type='primary'>Регистрация</Button>
+				<ShowOnly showRole='guest'>
+					<NavLink to={routes.signIn()}>
+						<Button size='large' type='link'>
+							Войти
+						</Button>
+					</NavLink>
+					<NavLink to={routes.signUp()}>
+						<Button size='large' type='primary'>
+							Регистрация
+						</Button>
+					</NavLink>
+				</ShowOnly>
+				<ShowOnly showRole='user'>
+					<SignOutButton />
+				</ShowOnly>
 			</div>
 		</HeaderRoot>
 	)

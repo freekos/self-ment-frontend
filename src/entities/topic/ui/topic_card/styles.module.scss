@@ -1,0 +1,21 @@
+.card_content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card_footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	margin-top: 20px;
+}
+
+.more_link {
+	width: 100%;
+
+	button {
+		width: 100%;
+	}
+}

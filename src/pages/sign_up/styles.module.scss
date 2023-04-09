@@ -1,0 +1,48 @@
+.root {
+	min-height: 100%;
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	flex-grow: 1;
+	height: 100%;
+
+	padding: 30px 0;
+}
+
+.logo_link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	margin-bottom: 60px;
+
+	img {
+		width: 50px;
+		height: 50px;
+		margin-right: 10px;
+	}
+
+	span {
+		font-size: 1.5rem;
+		font-weight: 700;
+	}
+}
+
+.title {
+}
+
+.form {
+	max-width: 300px;
+	width: 100%;
+
+	margin-top: 50px;
+}
+
+.form_bottom {
+	display: flex;
+	justify-content: flex-start;
+}
