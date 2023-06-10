@@ -2,6 +2,7 @@ import { Button, Input, Layout, Spin, Typography } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 import cn from 'classnames'
 import { useUnit } from 'effector-react'
+import { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 
 // import VideoRecorder from 'react-video-recorder'
@@ -12,6 +13,11 @@ import styles from './styles.module.scss'
 export function TopicCreatePage() {
 	const [handleMount, handleUnmount] = useUnit([model.$$pageEvent.mounted, model.$$pageEvent.unMounted])
 	const [step] = useUnit([model.$step])
+
+	useEffect(() => {
+		handleMount({ step: 'title' })
+		return () => handleUnmount()
+	}, [])
 
 	return (
 		<Layout className={styles.root}>
