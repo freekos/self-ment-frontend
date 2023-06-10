@@ -35,7 +35,7 @@ export function HomePage() {
 }
 
 function Topics() {
-	const [topics, topicsPending] = useUnit([model.$$topics.$topics, model.$$topics.$topicsPending])
+	const [topics, topicsPending] = useUnit([model.$resultTopics, model.$$topics.$topicsPending])
 
 	return (
 		<div className={styles.topics_content}>

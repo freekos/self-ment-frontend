@@ -1,8 +1,9 @@
 import { attach, createEvent, createStore, sample } from 'effector'
 
 import { createPageEvent } from '~src/entities/page_event'
+import { $$addedTopics } from '~src/entities/topic/model'
 
-import { type TopicAnalyze, topicApi } from '~src/shared/api'
+import { type Topic, type TopicAnalyze, topicApi } from '~src/shared/api'
 
 export type TopicCreateStep = 'title' | 'description' | 'video' | 'result'
 
@@ -43,3 +44,26 @@ sample({
 })
 
 $topicAnalyze.on(postTopicAnalyzeFx.doneData, (_, topicAnalyze) => topicAnalyze)
+
+sample({
+	clock: postTopicAnalyzeFx.doneData,
+	source: { title: $title, description: $description },
+	fn: ({ title, description }, topicAnalyze) =>
+		({
+			id: '0',
+			userId: '0',
+			createAt: '0',
+			updateAt: '0',
+			recommendsUrls: [],
+			responseText: topicAnalyze.text,
+			score: 100,
+			title,
+			description,
+		} as Topic),
+	target: $$addedTopics.addTopic,
+})
+
+sample({
+	clock: $$pageEvent.unMounted,
+	target: [$step.reinit!, $title.reinit!, $description.reinit!],
+})
